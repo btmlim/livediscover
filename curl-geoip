@@ -1,0 +1,9 @@
+-- API key for IPSTACK linked to Mundell's email address
+SELECT
+json_extract(curl.result,'$.continent_name') continent,
+json_extract(curl.result,'$.country_name') country,
+json_extract(curl.result,'$.region_name') region,
+json_extract(curl.result,'$.city') city,
+json_extract(curl.result,'$.ip') IP_address
+from curl
+where url = 'http:' || '/' || '/' || 'api.ipstack.com/' || (SELECT result from curl where url = 'http:' || '/' || '/' || 'ipv4bot.whatismyipaddress.com') || '?access_key=$$ipstackapikey$$';
